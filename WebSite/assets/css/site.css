@@ -1,0 +1,159 @@
+/* ===== Library Management System - custom styles (on top of Bootstrap 5) ===== */
+:root {
+    --sidebar-width: 250px;
+    --sidebar-bg: #1e293b;
+    --sidebar-text: #cbd5e1;
+    --sidebar-active: #3b82f6;
+    --page-bg: #f1f5f9;
+}
+
+body {
+    background: var(--page-bg);
+    font-size: 0.95rem;
+}
+
+.app-wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ----- Sidebar ----- */
+.sidebar {
+    width: var(--sidebar-width);
+    background: var(--sidebar-bg);
+    color: var(--sidebar-text);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    overflow-y: auto;
+    z-index: 1040;
+    transition: transform 0.25s ease;
+}
+
+.sidebar-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 1.25rem 1.25rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #fff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sidebar-brand i { font-size: 1.5rem; color: var(--sidebar-active); }
+
+.sidebar ul { list-style: none; padding: 0.75rem 0; margin: 0; }
+
+.sidebar .nav-section {
+    padding: 1rem 1.25rem 0.35rem;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #64748b;
+}
+
+.sidebar .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    color: var(--sidebar-text);
+    padding: 0.55rem 1.25rem;
+    border-left: 3px solid transparent;
+}
+
+.sidebar .nav-link:hover { background: rgba(255, 255, 255, 0.05); color: #fff; }
+
+.sidebar .nav-link.active {
+    background: rgba(59, 130, 246, 0.15);
+    border-left-color: var(--sidebar-active);
+    color: #fff;
+}
+
+.sidebar-backdrop { display: none; }
+
+/* ----- Main area ----- */
+.main {
+    flex: 1;
+    margin-left: var(--sidebar-width);
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.topbar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: #fff;
+    padding: 0.75rem 1.5rem;
+    border-bottom: 1px solid #e2e8f0;
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+}
+
+.page-title { font-size: 1.25rem; margin: 0; flex: 1; font-weight: 600; }
+.topbar-user { display: flex; align-items: center; gap: 0.75rem; }
+
+.content { padding: 1.5rem; flex: 1; }
+.footer { padding: 1rem 1.5rem; color: #94a3b8; font-size: 0.8rem; text-align: center; }
+
+/* ----- Cards ----- */
+.card { border: none; border-radius: 0.6rem; box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08); }
+.card-header { background: #fff; font-weight: 600; border-bottom: 1px solid #e2e8f0; }
+
+.stat-card .card-body { display: flex; align-items: center; gap: 1rem; }
+.stat-card .stat-icon {
+    width: 56px; height: 56px;
+    border-radius: 0.6rem;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem; color: #fff;
+}
+.stat-card .stat-value { font-size: 1.75rem; font-weight: 700; line-height: 1; }
+.stat-card .stat-label { color: #64748b; font-size: 0.85rem; }
+
+/* ----- Tables (GridView) ----- */
+.table { margin-bottom: 0; }
+.table th { white-space: nowrap; background: #f8fafc; font-weight: 600; color: #475569; }
+.table td { vertical-align: middle; }
+.grid-pager td { padding-top: 0.75rem; }
+.grid-pager table { margin: 0 auto; }
+.grid-pager a, .grid-pager span {
+    display: inline-block; padding: 0.25rem 0.6rem; margin: 0 2px;
+    border: 1px solid #dee2e6; border-radius: 0.25rem; text-decoration: none;
+}
+.grid-pager span { background: var(--sidebar-active); color: #fff; border-color: var(--sidebar-active); }
+
+/* ----- Forms / validation ----- */
+.required::after { content: " *"; color: #dc3545; }
+.field-error { color: #dc3545; font-size: 0.8rem; display: block; margin-top: 0.2rem; }
+
+/* ----- Login page ----- */
+.login-page {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, #1e293b 0%, #3b82f6 100%);
+    padding: 1rem;
+}
+.login-card { width: 100%; max-width: 400px; }
+
+/* ----- Responsive: sidebar slides in on small screens ----- */
+@media (max-width: 991.98px) {
+    .sidebar { transform: translateX(-100%); }
+    .sidebar.show { transform: translateX(0); }
+    .sidebar-backdrop.show {
+        display: block; position: fixed; inset: 0;
+        background: rgba(0, 0, 0, 0.4); z-index: 1030;
+    }
+    .main { margin-left: 0; }
+    .content { padding: 1rem; }
+}
+
+/* ----- Printing reports ----- */
+@media print {
+    .sidebar, .topbar, .footer, .no-print, .alert { display: none !important; }
+    .main { margin-left: 0; }
+    .card { box-shadow: none; }
+}
